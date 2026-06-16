@@ -23,9 +23,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserById(Long userId) {
-        userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User is not existing with the given id: "  + userId));
-        return null;
+        User user = userRepository.findById(userId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User is not existing with the given id: "  + userId));
+        return UserMapper.mapToUserDto(user);
     }
 
 }
