@@ -37,5 +37,13 @@ public class UserController {
         //return ResponseEntity.ok(users);
     }
 
+    //BUILD UPDATED USER REST API
+    @PutMapping("{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userId,
+                                              @RequestBody UserDto updatedUser) {
+        UserDto userDto = userService.updateUser(userId, updatedUser);
+        return ResponseEntity.ok(userDto);
+    }
+
 
 }

@@ -40,4 +40,27 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public UserDto updateUser(Long userId, UserDto updatedUser) {
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new ResourceNotFoundException("User is not existing with the given id: " + userId)
+        );
+
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
+        user.setEmail(updatedUser.getEmail());
+
+        User updatedUserObj = userRepository.save(user);
+
+        return UserMapper.mapToUserDto(updatedUserObj);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new ResourceNotFoundException("User is not existing with the given id: " + userId)
+        );
+        userRepository.deleteById(userId);
+    }
+
 }
