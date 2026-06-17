@@ -37,13 +37,11 @@ public class UserController {
         //return ResponseEntity.ok(users);
     }
 
-    //BUILD UPDATED USER REST API
-    @PutMapping("{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userId,
-                                              @RequestBody UserDto updatedUser) {
-        UserDto userDto = userService.updateUser(userId, updatedUser);
-        return ResponseEntity.ok(userDto);
+
+    //Build Delete User REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String>deleteUser(@PathVariable("id") Long userId) {
+        userService.deleteUser(userId);
+        return ResponseEntity.ok("User deleted Deleted Successfully");
     }
-
-
 }
